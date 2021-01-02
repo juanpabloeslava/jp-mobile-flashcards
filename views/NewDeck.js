@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native'
-// actions
+// reducers and actions
+import { useDispatch, useSelector } from 'react-redux'
 import { addDeck } from '../actions'
 // data
 import { saveDeckTitle } from '../utils/helpers' 
 
 const NewDeck = () => {
 
-    // local state
-    const [deckTitle, setDeckTitle] = useState('');
+    // local state and dispatch
+    const [deckTitle, setDeckTitle] = useState('')
+    const dispatch = useDispatch()
 
     // functions
     const handleChangeText = (text) => {
@@ -17,6 +19,10 @@ const NewDeck = () => {
 
     const submitDeck = () => {
         console.log('deck was submitted')
+        // save deck to AsyncStorage
+        saveDeckTitle(deckTitle)
+        // save deck to store
+        dispatch(addDeck(deckTitle))
     }
 
     return (
