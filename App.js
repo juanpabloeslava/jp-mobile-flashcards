@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import DeckList from './views/DeckList';
 // views and components 
+import DeckList from './views/DeckList'
 
 
 export default function App() {
@@ -11,7 +11,7 @@ export default function App() {
       <StatusBar style="auto" />
       <DeckList />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -21,4 +21,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})
