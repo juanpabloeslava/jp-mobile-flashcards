@@ -1,12 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import DeckList from './views/DeckList';
+// views and components 
+
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>So it begins</Text>
       <StatusBar style="auto" />
+      <DeckList />
     </View>
   );
 }
