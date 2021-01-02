@@ -1,7 +1,7 @@
 // initial data for decks and cards
 // Each deck creates a new key on the object. Each deck has a title and a questions key. title is the title for the specific deck and questions is an array of questions and answers for that deck.
 // correctAnswer was added to check easily if the answer is right or not
-const initialData = {
+export const initialData = {
     React: {
         title: 'React',
         questions: [
