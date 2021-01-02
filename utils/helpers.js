@@ -1,4 +1,4 @@
-import { AsyncStorage } from '@react-native-async-storage/async-storage@1.13.2'
+import { AsyncStorage } from '@react-native-async-storage/async-storage'
 import { initalData } from './api'
 
 const DECKS_STORAGE_KEY = 'MobileCards:Decks';

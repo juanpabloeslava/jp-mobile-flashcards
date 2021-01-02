@@ -5,13 +5,15 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 // views and components 
 import DeckList from './views/DeckList'
+import NewDeck from './views/NewDeck';
 
 
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <DeckList />
+      {/* <DeckList /> */}
+      <NewDeck />
     </View>
   )
 }
