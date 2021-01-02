@@ -1,4 +1,4 @@
-import { ADD_CARD, ADD_DECK, RECIEVE_DECKS } from './actionTypes'
+import { ADD_CARD, ADD_DECK, RECEIVE_DECKS } from './actionTypes'
 
 export const addDeck = deck => {
     return {
@@ -7,7 +7,7 @@ export const addDeck = deck => {
     }
 }
 
-export const recieveDecks = decks => {
+export const receiveDecks = decks => {
     return {
         type: RECIEVE_DECKS,
         decks

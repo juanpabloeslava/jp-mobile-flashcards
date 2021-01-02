@@ -1,5 +1,5 @@
-import { AsyncStorage } from '@react-native-async-storage/async-storage'
-import { initalData } from './api'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { initialData } from './api'
 
 const DECKS_STORAGE_KEY = 'MobileCards:Decks';
 
@@ -11,8 +11,8 @@ export async function getAllDecks () {
         .then( results => {
             // if there's no previous data, use the dummy data
             if ( results === null ) {
-                AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(initalData))
-                return initalData
+                AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(initialData))
+                return initialData
             } 
             // if there's some data already, use it
             else {
