@@ -1,5 +1,7 @@
 // yarn add @react-native-async-storage/async-storage
 // yarn add redux react-redux
+// yarn add @react-navigation/native @react-navigation/stack
+// yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
 
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
