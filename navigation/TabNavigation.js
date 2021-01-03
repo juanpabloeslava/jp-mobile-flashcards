@@ -2,7 +2,7 @@
 import 'react-native-gesture-handler'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-// import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 
@@ -35,11 +35,11 @@ const TabNavigation = () => {
                     )
                 })}
             >
-                <Stack.Screen
+                <Tabs.Screen
                     name="deckList"
                     component={DeckList}
                 />
-                <Stack.Screen
+                <Tabs.Screen
                     name="newDeck"
                     component={NewDeck}
                 />
