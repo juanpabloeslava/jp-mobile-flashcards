@@ -2,9 +2,12 @@
 // yarn add redux react-redux
 // yarn add @react-navigation/native @react-navigation/stack
 // yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+// yarn add @react-navigation/material-bottom-tabs react-native-paper
+// yarn add @react-navigation/material-top-tabs react-native-tab-view
 
 // navigation
 import NavStack from './navigation/NavStack'
+import TabNavigation from './navigation/TabNavigation';
 // others 
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
@@ -23,7 +26,8 @@ export default function App() {
   return (
     <Provider store={store} >
         <StatusBar style="auto" />
-        <NavStack />
+        {/* <NavStack /> */}
+        {/* <TabNavigation /> */}
     </Provider>
   )
 }
