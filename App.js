@@ -11,6 +11,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+// colors and icons
+import { white } from './utils/colors'
 // redux
 import { Provider } from 'react-redux'
 import store from './store'
@@ -25,11 +27,8 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <Provider store={store} >
-      <View style={styles.container}>
-        {/* <StatusBar style="auto" /> */}
-        {/* <DeckList /> */}
-        {/* <NewDeck /> */}
-        <NavigationContainer>
+        <StatusBar style="auto" />
+        <NavigationContainer style={styles.container}>
           <Stack.Navigator>
             <Stack.Screen
               name="newDeck"
@@ -41,7 +40,6 @@ export default function App() {
             />
           </Stack.Navigator>
         </NavigationContainer>
-      </View>
     </Provider>
   )
 }
@@ -49,7 +47,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: white,
     alignItems: 'center',
     justifyContent: 'center',
   },

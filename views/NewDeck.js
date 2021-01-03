@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native'
+// colors and icons
+import { white } from '../utils/colors'
 // reducers and actions
 import { useDispatch, useSelector } from 'react-redux'
 import { addDeck } from '../actions'
@@ -52,6 +54,7 @@ const NewDeck = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
+      backgroundColor: white,
       alignItems: 'center',
       justifyContent: 'center',
     },
