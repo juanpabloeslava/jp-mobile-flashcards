@@ -29,7 +29,7 @@ export const getDeck = (id) => {
 // take in a single title argument and add it to the decks
 export const saveDeckTitle = async (title) => {
     console.log('saveDeckTitle')
-    AsyncStorage.getItem(DECKS_STORAGE_KEY, JSON.stringify({
+    AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify({
         [title]: {
             title: title,
             questions: []

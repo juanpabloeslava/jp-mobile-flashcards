@@ -1,15 +1,15 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 // data
 import { getInitialData } from '../utils/api' 
 
-const DeckList = () => {
+const DeckList = ({ navigation }) => {
 
     const decks = getInitialData()
     console.log('decks: ', decks)
 
     return (
-        <View>
+        <View style={styles.container}>
             {
                 Object.keys(decks).map( deck => {
 
@@ -25,6 +25,12 @@ const DeckList = () => {
                     )
                 })
             }
+            <TouchableOpacity
+                onPress={() => navigation.navigate('newDeck')}
+                title='navList'
+            >
+                <Text>add new deck</Text>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -36,7 +42,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     question: {
-        marginBottom: '1rem'
+        marginBottom: 16
     }
   })
 

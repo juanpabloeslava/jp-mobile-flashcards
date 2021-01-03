@@ -6,7 +6,7 @@ import { addDeck } from '../actions'
 // data
 import { saveDeckTitle } from '../utils/helpers' 
 
-const NewDeck = () => {
+const NewDeck = ({ navigation }) => {
 
     // local state and dispatch
     const [deckTitle, setDeckTitle] = useState('')
@@ -28,8 +28,7 @@ const NewDeck = () => {
     return (
         <View style={styles.container}>
             <Text>Deck title:</Text>
-            <TextInput 
-                style={styles.input}
+            <TextInput
                 onChangeText={handleChangeText}
                 value={deckTitle}
             />
@@ -39,6 +38,12 @@ const NewDeck = () => {
                 placeholder="Enter your deck's title"
             >
                 <Text>submit</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => navigation.navigate('deckList')}
+                title='navList'
+            >
+                <Text>go to list</Text>
             </TouchableOpacity>
         </View>
     )
@@ -50,17 +55,6 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-    input: {
-        borderWidth: 1,
-        borderColor: '#d7d7d7',
-        width: '100%',
-        height: 48,
-        margin: 32,
-        borderRadius: 4,
-        paddingHorizontal: 16,
-        fontSize: 24,
-        fontWeight:'300'
-    }
   })
 
 export default NewDeck
