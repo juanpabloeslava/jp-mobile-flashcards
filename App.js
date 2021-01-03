@@ -4,9 +4,7 @@
 // yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
 
 // navigation
-import 'react-native-gesture-handler'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import NavStack from './navigation/NavStack'
 // others 
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
@@ -18,28 +16,14 @@ import { Provider } from 'react-redux'
 import store from './store'
 // views and components 
 import DeckList from './views/DeckList'
-import NewDeck from './views/NewDeck';
-
-
-const Stack = createStackNavigator();
+import NewDeck from './views/NewDeck'
 
 
 export default function App() {
   return (
     <Provider store={store} >
         <StatusBar style="auto" />
-        <NavigationContainer style={styles.container}>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="newDeck"
-              component={NewDeck}
-            />
-            <Stack.Screen
-              name="deckList"
-              component={DeckList}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <NavStack />
     </Provider>
   )
 }
