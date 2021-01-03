@@ -6,7 +6,7 @@ const DECKS_STORAGE_KEY = 'MobileCards:Decks';
 // initial helper methods
 
 // return all of the decks along with their titles, questions, and answers.
-export async function getAllDecks () {
+export const getAllDecks = async () => {
     AsyncStorage.getItem(DECKS_STORAGE_KEY)
         .then( results => {
             // if there's no previous data, use the dummy data
@@ -27,7 +27,7 @@ export const getDeck = (id) => {
 }
 
 // take in a single title argument and add it to the decks
-export async function saveDeckTitle (title) {
+export const saveDeckTitle = async (title) => {
     console.log('saveDeckTitle')
     AsyncStorage.getItem(DECKS_STORAGE_KEY, JSON.stringify({
         [title]: {
