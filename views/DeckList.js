@@ -35,7 +35,7 @@ const DeckList = (props) => {
     // on comp mount
     useEffect(() => {
         console.log('dummy data: ', getInitialData())
-        // dispatch(receiveDecksAsync())        // not yet, needs thunk
+        dispatch(receiveDecksAsync())        // not yet, needs thunk
     }, [])
 
     console.log('props in decklist comp: ', props)

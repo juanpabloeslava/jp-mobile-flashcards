@@ -5,6 +5,8 @@
 // yarn add @react-navigation/bottom-tabs
 // yarn add @react-navigation/material-bottom-tabs react-native-paper
 // yarn add @react-navigation/material-top-tabs react-native-tab-view
+// yarn add redux-logger
+// yarn add redux-thunk
 
 // navigation
 import TabNavigation from './navigation/TabNavigation';

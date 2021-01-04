@@ -9,8 +9,8 @@ const decks = ( state = initialState, action ) => {
             return {
                 ...state,
                 // add the new deck
-                // ...action.decks
-                decks: { ...action.decks }
+                ...action.decks
+                // decks: { ...action.decks }
             }
         case ADD_DECK : 
             return {
