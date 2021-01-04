@@ -7,7 +7,6 @@
 // yarn add @react-navigation/material-top-tabs react-native-tab-view
 
 // navigation
-import NavStack from './navigation/NavStack'
 import TabNavigation from './navigation/TabNavigation';
 // others 
 import { StatusBar } from 'expo-status-bar';

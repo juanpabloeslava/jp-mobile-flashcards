@@ -13,6 +13,8 @@ import { Platform } from 'react-native'
 import { white } from '../utils/colors'
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
 // components
+import StackRegular from './StackRegular'
+import StackNewDeck from './StackNewDeck'
 import DeckList from '../views/DeckList'
 import NewDeck from '../views/NewDeck'
 
@@ -24,24 +26,24 @@ const TabNavigation = () => {
     return (
         <NavigationContainer>
             <Tabs.Navigator
-                initialRouteName='deckList'
+                initialRouteName='Decks'
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ tintColor }) => (
-                        route.name === 'deckList'
+                        route.name === 'Add new Deck'
                             ? <MaterialCommunityIcons name='cards' size={30} color={tintColor} />
-                            : route.name === 'newDeck'
+                            : route.name === 'StackNewDeck'
                                 ? <FontAwesome name='plus-square' size={30} color={tintColor} />
                                 : null
                     )
                 })}
             >
                 <Tabs.Screen
-                    name="deckList"
-                    component={DeckList}
+                    name="Decks"
+                    component={StackRegular}
                 />
                 <Tabs.Screen
-                    name="newDeck"
-                    component={NewDeck}
+                    name="Add new Deck"
+                    component={StackNewDeck}
                 />
             </Tabs.Navigator>
         </NavigationContainer>

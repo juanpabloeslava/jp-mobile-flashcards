@@ -13,25 +13,19 @@ import Deck from '../views/Deck';
 const Stack = createStackNavigator();
 
 
-const NavStack = () => {
+const StackRegular = () => {
     return (
-        <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen
-                    name="deckList"
+                    name="Decks"
                     component={DeckList}
                 />
                 <Stack.Screen
-                    name="newDeck"
-                    component={NewDeck}
-                />
-                <Stack.Screen
-                    name="deck"
+                    name="Deck"
                     component={Deck}
                 />
             </Stack.Navigator>
-        </NavigationContainer>
     )
 }
 
-export default NavStack
+export default StackRegular
