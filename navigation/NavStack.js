@@ -17,7 +17,7 @@ const Stack = createStackNavigator();
 
 const NavStack = () => {
     return (
-        <NavigationContainer style={styles.container}>
+        <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen
                     name="deckList"
@@ -31,14 +31,5 @@ const NavStack = () => {
         </NavigationContainer>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: white,
-        alignItems: 'center',
-        justifyContent: 'center',
-    }
-})
 
 export default NavStack

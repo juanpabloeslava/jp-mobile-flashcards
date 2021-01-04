@@ -38,8 +38,5 @@ const styles = StyleSheet.create({
     backgroundColor: white,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  navContainer: {
-    flex: 1
   }
 })
