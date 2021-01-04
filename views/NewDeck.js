@@ -41,10 +41,7 @@ const NewDeck = ({ navigation }) => {
             >
                 <Text>submit</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-                onPress={() => navigation.navigate('deckList')}
-                title='navList'
-            >
+            <TouchableOpacity onPress={() => navigation.navigate('Decks')}>
                 <Text>go to list</Text>
             </TouchableOpacity>
         </View>

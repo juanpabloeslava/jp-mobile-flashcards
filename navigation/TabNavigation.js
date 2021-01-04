@@ -15,24 +15,23 @@ import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
 // components
 import StackRegular from './StackRegular'
 import StackNewDeck from './StackNewDeck'
-import DeckList from '../views/DeckList'
-import NewDeck from '../views/NewDeck'
 
 const Tabs = Platform.OS === 'ios'
     ? createBottomTabNavigator()
-    : createMaterialTopTabNavigator()
+    : createMaterialBottomTabNavigator()
 
 const TabNavigation = () => {
     return (
         <NavigationContainer>
             <Tabs.Navigator
                 initialRouteName='Decks'
+                activeColor={white}
                 screenOptions={({ route }) => ({
-                    tabBarIcon: ({ tintColor }) => (
-                        route.name === 'Add new Deck'
-                            ? <MaterialCommunityIcons name='cards' size={30} color={tintColor} />
-                            : route.name === 'StackNewDeck'
-                                ? <FontAwesome name='plus-square' size={30} color={tintColor} />
+                    tabBarIcon: ({ color }) => (
+                        route.name === 'Decks'
+                            ? <MaterialCommunityIcons name='cards' size={24} color={color} />
+                            : route.name === 'Add new Deck'
+                                ? <FontAwesome name='plus-square' size={24} color={color} />
                                 : null
                     )
                 })}
