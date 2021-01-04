@@ -1,4 +1,6 @@
 import { ADD_CARD, ADD_DECK, RECEIVE_DECKS } from './actionTypes'
+// data
+import { getAllDecks } from '../utils/helpers'
 
 export const addDeck = deck => {
     return {
@@ -9,7 +11,7 @@ export const addDeck = deck => {
 
 export const receiveDecks = decks => {
     return {
-        type: RECIEVE_DECKS,
+        type: RECEIVE_DECKS,
         decks
     }
 }
@@ -19,4 +21,13 @@ export const addCard = card => {
         type: ADD_CARD,
         deck
     }
+}
+
+// async
+export const receiveDecksAsync = () => (dispatch) => {
+    getAllDecks()
+        .then( decks => {
+            console.log('decks in async shit: ', decks)
+            dispatch(receiveDecks(decks))
+        })
 }
