@@ -7,7 +7,9 @@ const decks = ( state = initialState, action ) => {
     switch (action.type) {
         case RECEIVE_DECKS :
             return {
-
+                ...state,
+                // add the new deck
+                ...action.decks
             }
         case ADD_DECK : 
             return {
