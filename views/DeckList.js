@@ -4,48 +4,26 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { white, blue } from '../utils/colors'
 // data
 import { getInitialData } from '../utils/api'
-import { getAllDecks } from '../utils/helpers'
 // redux
-import { connect, useSelector, useDispatch } from 'react-redux'
-import { receiveDecks, receiveDecksAsync } from '../actions'
+import { useSelector, useDispatch } from 'react-redux'
+import { receiveDecksAsync } from '../actions'
 
-// const DeckList = ({ navigation }) => {
 const DeckList = (props) => {
 
     const { navigation } = props
     const dispatch = useDispatch()
 
-    const decks = getInitialData()
-
-    // on comp mount
-    // useEffect(() => {
-    //     console.log('dummy data: ', getInitialData())
-    //     // return all of the decks along with their titles, questions, and answers.
-    //     getAllDecks()
-    //         // .then(decks => dispatch(receiveDecks(decks)))
-    //         .then( decks => {
-    //             console.log(decks)
-    //             // dispatch(receiveDecks(decks))
-    //         })
-    //         .catch( err => {
-    //             console.log(err)
-    //         })
-    // }, [])
-    
     // on comp mount
     useEffect(() => {
-        console.log('dummy data: ', getInitialData())
-        dispatch(receiveDecksAsync())        // not yet, needs thunk
+        // get all decks from AsyncStore and put them in the state
+        dispatch(receiveDecksAsync())
+
     }, [])
-
-    console.log('props in decklist comp: ', props)
     
-    const state = useSelector( (state) => state )
-
-    // const { decks } = props
-    // const { state } = props
-    // console.log('decks: ', decks)
-    console.log('state: ', state)
+    // const decks = getInitialData()
+    const decks = useSelector(state => state.decks)
+    
+    console.log('decks in  deck list: ', decks)
 
     return (
         <View style={styles.container}>
@@ -91,14 +69,5 @@ const styles = StyleSheet.create({
         margin: 16
     }
 })
-
-// const mapStateToProps = (decks) => {
-// const mapStateToProps = ({ decks }) => {
-//     return decks
-// }
-
-// export default connect(
-//     mapStateToProps
-// )(DeckList) 
 
 export default DeckList

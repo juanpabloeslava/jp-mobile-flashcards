@@ -22,9 +22,9 @@ const NewDeck = ({ navigation }) => {
     const submitDeck = () => {
         console.log('deck was submitted')
         // save deck to AsyncStorage
-        saveDeckTitle(deckTitle)
+        // saveDeckTitle(deckTitle)
         // save deck to store
-        dispatch(addDeck(deckTitle))
+        // dispatch(addDeck(deckTitle))
     }
 
     return (

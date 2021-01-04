@@ -35,47 +35,46 @@ export const getInitialData = () => {
     }
 }
 
-// export const getAllDecks = async () => {
-    export async function getAllDecks () {
-        try {
-            const results = await AsyncStorage.getItem(DECKS_STORAGE_KEY)
-            // if results are available, return them, if not, use dummy data
-            if (results) {
-                const data = JSON.parse(results)
-                return data
-            } else {
-                await AsyncStorage.setItem(
-                    DECKS_STORAGE_KEY,
-                    JSON.stringify(getInitialData())
-                )
-                return getInitialData()
-            }
-        } catch (error) {
-            await AsyncStorage.setItem(
+export async function getAllDecks () {
+    try {
+        const results = await AsyncStorage.getItem(DECKS_STORAGE_KEY)
+        // if results are available, return them
+        if (results !== null) {
+            const data = JSON.parse(results)
+            console.log('test: ', data)
+            return data
+        } 
+        // if not, use dummy data
+        else {
+            AsyncStorage.setItem(
                 DECKS_STORAGE_KEY,
                 JSON.stringify(getInitialData())
             )
-            return getInitialData()
         }
+    } 
+    catch (error) {
+        console.loh(error)
     }
-    
-    // take in a single id argument and return the deck associated with that id.
-    export const getDeck = (id) => {
-        console.log('getDeck')
-    }
-    
-    // take in a single title argument and add it to the decks
-    export const saveDeckTitle = async (title) => {
-        console.log('saveDeckTitle')
-        AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify({
-            [title]: {
-                title: title,
-                questions: []
-            }
-        }))
-    }
-    
-    // take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title.
-    export const addCardToDeck = (title, card) => {
-        console.log('addCardToDeck')
-    }
+}
+
+
+// take in a single id argument and return the deck associated with that id.
+export const getDeck = (id) => {
+    console.log('getDeck')
+}
+
+// take in a single title argument and add it to the decks
+export const saveDeckTitle = async (title) => {
+    console.log('saveDeckTitle')
+    AsyncStorage.getItem(DECKS_STORAGE_KEY, JSON.stringify({
+        [title]: {
+            title: title,
+            questions: []
+        }
+    }))
+}
+
+// take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title.
+export const addCardToDeck = (title, card) => {
+    console.log('addCardToDeck')
+}
