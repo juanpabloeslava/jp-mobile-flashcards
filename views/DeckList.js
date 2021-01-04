@@ -15,21 +15,22 @@ const DeckList = ({ navigation }) => {
             {
                 Object.keys(decks).map( deck => {
 
-                    const { title, questions } = decks[deck]
+                    const currentDeck = decks[deck]
+                    const { title, questions } = currentDeck
 
                     return (
                         <View key={title} style={styles.question}>
                             <Text>{title}</Text>
                             <Text>{questions.length}</Text>
-                            {/* {
-                                questions.map( question => <Text key={question.question}>{question.question}</Text>)
-                            } */}
-                            {/* <TouchableOpacity
+                            <TouchableOpacity
                                 // second arg in function: a key passed into the rendered comp (first arg) as a prop
-                                onPress={() => navigation.navigate('deck', { entryId: deck })}
+                                onPress={() => {
+                                    console.log(currentDeck)
+                                    return navigation.navigate('Deck', { deckID: deck })
+                                }}
                             >
                                 <Text style={styles.viewDeckText}>view deck</Text>
-                            </TouchableOpacity> */}
+                            </TouchableOpacity>
                         </View>
                     )
                 })

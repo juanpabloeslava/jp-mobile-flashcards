@@ -3,10 +3,16 @@ import { StyleSheet, Text, View } from 'react-native'
 // colors and icons
 import { white } from '../utils/colors'
 
-const Deck = ({ navigation, entryId }) => {
+
+const Deck = (props) => {
+    
+    const { navigation } = props
+    const deck = props.route.params.deckID
+
     return (
         <View style={styles.container}>
-            <Text> Deck Component: {entryId}</Text>
+            <Text> Deck Component:</Text>
+            <Text>{deck}</Text>
         </View>
     )
 }
