@@ -3,13 +3,11 @@ import 'react-native-gesture-handler'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 // react 
-import React from 'react';
-import { StyleSheet } from 'react-native';
-// colors and icons
-import { white } from '../utils/colors'
+import React from 'react'
 // components
 import DeckList from '../views/DeckList'
 import NewDeck from '../views/NewDeck';
+import Deck from '../views/Deck';
 
 
 const Stack = createStackNavigator();
@@ -26,6 +24,10 @@ const NavStack = () => {
                 <Stack.Screen
                     name="newDeck"
                     component={NewDeck}
+                />
+                <Stack.Screen
+                    name="deck"
+                    component={Deck}
                 />
             </Stack.Navigator>
         </NavigationContainer>
