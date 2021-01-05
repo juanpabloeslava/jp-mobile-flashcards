@@ -4,12 +4,13 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-nativ
 import { white } from '../utils/colors'
 // reducers and actions
 import { useDispatch, useSelector } from 'react-redux'
-import { addDeck } from '../actions'
+import { addDeck, addDeckAsync } from '../actions'
 // data
-import { saveDeckTitle } from '../utils/helpers' 
+// import { saveDeckTitle } from '../utils/helpers' 
 
-const NewDeck = ({ navigation }) => {
+const NewDeck = (props) => {
 
+    const { navigation } = props
     // local state and dispatch
     const [deckTitle, setDeckTitle] = useState('')
     const dispatch = useDispatch()
@@ -20,11 +21,13 @@ const NewDeck = ({ navigation }) => {
     }
 
     const submitDeck = () => {
-        console.log('deck was submitted')
-        // save deck to AsyncStorage
-        // saveDeckTitle(deckTitle)
-        // save deck to store
-        // dispatch(addDeck(deckTitle))
+        console.log('deck was submitted: ', deckTitle)
+        // dispatch async action
+        dispatch(addDeckAsync(deckTitle))
+        // clear state
+        setDeckTitle('')
+        // go to the new deck's view
+        navigation.navigate('Deck', { deckID: deckTitle })
     }
 
     return (
@@ -41,20 +44,17 @@ const NewDeck = ({ navigation }) => {
             >
                 <Text>submit</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Decks')}>
-                <Text>go to list</Text>
-            </TouchableOpacity>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: white,
-      alignItems: 'center',
-      justifyContent: 'center',
+        flex: 1,
+        backgroundColor: white,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-  })
+})
 
 export default NewDeck

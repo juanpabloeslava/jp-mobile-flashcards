@@ -35,7 +35,7 @@ export const getInitialData = () => {
     }
 }
 
-export async function getAllDecks () {
+export async function getAllDecks() {
     try {
         const results = await AsyncStorage.getItem(DECKS_STORAGE_KEY)
         // if results are available, return them
@@ -43,7 +43,7 @@ export async function getAllDecks () {
             const data = JSON.parse(results)
             console.log('test: ', data)
             return data
-        } 
+        }
         // if not, use dummy data
         else {
             AsyncStorage.setItem(
@@ -51,7 +51,7 @@ export async function getAllDecks () {
                 JSON.stringify(getInitialData())
             )
         }
-    } 
+    }
     catch (error) {
         console.loh(error)
     }
@@ -64,7 +64,7 @@ export const getDeck = (id) => {
 }
 
 // take in a single title argument and add it to the decks
-export const saveDeckTitle = async (title) => {
+export const saveDeckTitle2 = async (title) => {
     console.log('saveDeckTitle')
     AsyncStorage.getItem(DECKS_STORAGE_KEY, JSON.stringify({
         [title]: {
@@ -73,6 +73,25 @@ export const saveDeckTitle = async (title) => {
         }
     }))
 }
+
+export async function saveDeckTitle(title) {
+    console.log('saveDeckTitle')
+    const deck = {
+        [title]: {
+            title: title,
+            questions: [],
+        },
+    }
+    await AsyncStorage.mergeItem(
+        DECKS_STORAGE_KEY,
+        JSON.stringify({
+            ...deck
+        })
+    )
+    // return deck so it can use this to dispatch the addDeck action
+    return deck;
+}
+
 
 // take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title.
 export const addCardToDeck = (title, card) => {
