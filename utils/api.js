@@ -52,7 +52,7 @@ export async function getAllDecks() {
         }
     }
     catch (error) {
-        console.loh(error)
+        console.log(error)
     }
 }
 
@@ -95,4 +95,19 @@ export async function saveDeckTitle(title) {
 // take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title.
 export const addCardToDeck = (title, card) => {
     console.log('addCardToDeck')
+    // return AsyncStorage.getItem(DECKS_STORAGE_KEY)
+    //     .then(results => {
+    //         const parsedResults = JSON.parse(results)
+    //         return parsedResults
+    //     })
+    //     .then(resp => {
+    //         // set the new card into the decks data on the Asyc Storage
+    //         resp[title].questions.push(card)
+    //         // re-set the AsyncStorage with the updated info
+    //         AsyncStorage.setItem(
+    //             DECKS_STORAGE_KEY,
+    //             JSON.stringify(resp)
+    //         )
+    //         return resp
+    //     })
 }
