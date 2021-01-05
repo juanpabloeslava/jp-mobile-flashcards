@@ -41,7 +41,6 @@ export async function getAllDecks() {
         // if results are available, return them
         if (results !== null) {
             const data = JSON.parse(results)
-            console.log('test: ', data)
             return data
         }
         // if not, use dummy data

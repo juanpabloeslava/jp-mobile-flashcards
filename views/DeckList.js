@@ -20,9 +20,7 @@ const DeckList = (props) => {
 
     }, [])
     
-    // const decks = getInitialData()
-    const decks = useSelector(state => state.decks)
-    
+    const decks = useSelector(state => state.decks) 
     console.log('decks in  deck list: ', decks)
 
     return (

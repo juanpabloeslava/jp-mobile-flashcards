@@ -31,7 +31,6 @@ export const receiveDecksAsync = () => dispatch => {
     getAllDecks()
         // with response, dipatch an action
         .then( decks => {
-            console.log('decks from deceiveDecksAsync: ', decks)
             dispatch(receiveDecks(decks))
         })
 }
@@ -42,7 +41,7 @@ export const addDeckAsync = deckTitle => dispatch => {
     saveDeckTitle(deckTitle)
         // when promise resolves, dispatch an action 
         .then( deck => {
-            console.log('deck added in addNewDeckAsync: ', deck)
+            // the deck response is what's passed into the action creator
             dispatch(addDeck(deck))
             return deck
         })

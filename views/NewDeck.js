@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
         padding: 8,
         borderRadius: 4,
         overflow: 'hidden',
-
     },
     submitBtnText: {
         color: colors.white,
