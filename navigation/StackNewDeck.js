@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 // react 
 import React from 'react'
 // components
-import NewDeck from '../views/NewDeck';
+import AddDeck from '../views/AddDeck';
 
 
 const Stack = createStackNavigator();
@@ -16,7 +16,7 @@ const StackNewDeck = () => {
             <Stack.Navigator>
                 <Stack.Screen
                     name="Add Deck"
-                    component={NewDeck}
+                    component={AddDeck}
                 />
             </Stack.Navigator>
     )

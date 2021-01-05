@@ -19,9 +19,6 @@ import { white } from './utils/colors'
 // redux
 import { Provider } from 'react-redux'
 import store from './store'
-// views and components 
-import DeckList from './views/DeckList'
-import NewDeck from './views/NewDeck'
 
 
 export default function App() {

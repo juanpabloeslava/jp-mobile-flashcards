@@ -36,7 +36,7 @@ export const receiveDecksAsync = () => dispatch => {
 }
 
 export const addDeckAsync = deckTitle => dispatch => {
-    console.log('addNewDeckAsync')
+    console.log('addDeckAsync')
     // call api
     saveDeckTitle(deckTitle)
         // when promise resolves, dispatch an action 

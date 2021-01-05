@@ -8,7 +8,7 @@ import { addDeck, addDeckAsync } from '../actions'
 // data
 // import { saveDeckTitle } from '../utils/helpers' 
 
-const NewDeck = (props) => {
+const AddDeck = (props) => {
 
     const { navigation } = props
     // local state and dispatch
@@ -97,4 +97,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default NewDeck
+export default AddDeck

@@ -6,7 +6,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react'
 // components
 import DeckList from '../views/DeckList'
-import NewDeck from '../views/NewDeck';
 import Deck from '../views/Deck';
 
 
