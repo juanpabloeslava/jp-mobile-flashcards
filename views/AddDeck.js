@@ -3,10 +3,10 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-nativ
 // colors and icons
 import { colors } from '../utils/colors'
 // reducers and actions
-import { useDispatch, useSelector } from 'react-redux'
-import { addDeck, addDeckAsync } from '../actions'
-// data
-// import { saveDeckTitle } from '../utils/helpers' 
+import { useDispatch } from 'react-redux'
+import { addDeckAsync } from '../actions'
+// comps
+import ActionButton from '../components/ActionButton'
 
 const AddDeck = (props) => {
 
@@ -43,14 +43,11 @@ const AddDeck = (props) => {
                     value={deckTitle}
                 />
             </View>
-            <TouchableOpacity
-                style={styles.submitBtn}
+            <ActionButton 
                 onPress={submitDeck}
-                title='submit'
-                placeholder="Enter your deck's title"
-            >
-                <Text style={styles.submitBtnText}>submit</Text>
-            </TouchableOpacity>
+                text='Action Submit'
+                color={colors.blue}
+            />
         </View>
     )
 }
