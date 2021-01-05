@@ -74,7 +74,7 @@ export const saveDeckTitle2 = async (title) => {
 }
 
 export async function saveDeckTitle(title) {
-    console.log('saveDeckTitle')
+    console.log('saveDeckTitle: ', title)
     const deck = {
         [title]: {
             title: title,

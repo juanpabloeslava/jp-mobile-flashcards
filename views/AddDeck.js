@@ -21,7 +21,6 @@ const AddDeck = (props) => {
     }
 
     const submitDeck = () => {
-        console.log('deck was submitted: ', deckTitle)
         // dispatch async action
         dispatch(addDeckAsync(deckTitle))
         // clear state
@@ -32,8 +31,8 @@ const AddDeck = (props) => {
 
     return (
         <View style={styles.container}>
-            <Text 
-                // style={styles.title}
+            <Text
+            // style={styles.title}
             >
                 Deck title:
             </Text>
