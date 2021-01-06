@@ -8,6 +8,7 @@ import React from 'react'
 import DeckList from '../views/DeckList'
 import Deck from '../views/Deck';
 import AddCard from '../views/AddCard';
+import DeckListClass from '../views/DeckListClass';
 
 
 const Stack = createStackNavigator();
@@ -19,6 +20,7 @@ const StackRegular = () => {
                 <Stack.Screen
                     name="Decks"
                     component={DeckList}
+                    // component={DeckListClass}
                     options={{
                         headerShown: false
                     }}
