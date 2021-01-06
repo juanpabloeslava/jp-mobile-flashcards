@@ -26,7 +26,7 @@ const AddDeck = (props) => {
         // clear state
         setDeckTitle('')
         // go to the new deck's view
-        navigation.navigate('Deck', { deckID: deckTitle })
+        navigation.navigate('Deck Details', { deckID: deckTitle })
     }
 
     return (

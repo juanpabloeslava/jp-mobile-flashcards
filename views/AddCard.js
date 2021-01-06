@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, TextInput, KeyboardAvoidingView, View } from 'react-native'
+// navigation
+import { CommonActions } from '@react-navigation/native'
 // colors and icons
 import { colors } from '../utils/colors'
 // reducers and actions
-import { useDispatch, useSelector } from 'react-redux'
-// import { addDeck, addDeckAsync } from '../actions'
+import { useDispatch } from 'react-redux'
+// import { addCardAsync } from '../actions'
+// temp data and temp actions
+import { addCard, addCardAsync } from '../actions'
+import { addCardToDeck } from '../utils/api'
 // comps
 import ActionButton from '../components/ActionButton'
 
@@ -22,20 +27,34 @@ const AddCard = (props) => {
     const { navigation } = props
     const currentDeck = props.route.params.deckID
     console.log('current deck id in add new card: ', currentDeck)
-    
+
     // functions
     const handleChangeQuestion = text => setQuestion(text)
     const handleChangeAnswer = text => setAnswer(text)
+    const handleChangeCorrectAnswer = text => setCorrectAnswer(text)
 
-    const submitCard = (deck) => {
+    const submitCard = () => {
         console.log('card was submitted')
         // dispatch async action
         // dispatch(addDeckAsync(deckTitle))
         // clear state
-        setQuestion('')
-        setAnswer('')
+        // setQuestion('')
+        // setAnswer('')
+        // setCorrectAnswer('')
         // go to the new card's view
         // navigation.navigate('Card', { cardID: question })
+        
+        // temp follow along
+        const card = { question, answer, correctAnswer }
+        dispatch(addCard(currentDeck, card))
+        // update async
+        addCardToDeck(currentDeck, card)
+        // clear state
+        setQuestion('')
+        setAnswer('')
+        setCorrectAnswer('')
+        // go to deck
+        navigation.dispatch(CommonActions.goBack())
     }
 
     return (
@@ -60,8 +79,18 @@ const AddCard = (props) => {
                     onChangeText={handleChangeAnswer}
                 />
             </View>
+            <Text>
+                Correct Answer (true or false)
+            </Text>
+            <View style={styles.inputContainer}>
+                <TextInput
+                    style={styles.input}
+                    value={correctAnswer}
+                    onChangeText={handleChangeCorrectAnswer}
+                />
+            </View>
             <ActionButton 
-                onPress={ () => console.log('Submit card')}
+                onPress={submitCard}
                 text='Submit card'
                 color={colors.blue}
             />
