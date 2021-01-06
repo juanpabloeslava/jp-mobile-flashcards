@@ -8,8 +8,7 @@ import { colors } from '../utils/colors'
 import { useDispatch } from 'react-redux'
 // import { addCardAsync } from '../actions'
 // temp data and temp actions
-import { addCard, addCardAsync } from '../actions'
-import { addCardToDeck } from '../utils/api'
+import { addCardAsync } from '../actions'
 // comps
 import ActionButton from '../components/ActionButton'
 
@@ -35,20 +34,9 @@ const AddCard = (props) => {
 
     const submitCard = () => {
         console.log('card was submitted')
-        // dispatch async action
-        // dispatch(addDeckAsync(deckTitle))
-        // clear state
-        // setQuestion('')
-        // setAnswer('')
-        // setCorrectAnswer('')
-        // go to the new card's view
-        // navigation.navigate('Card', { cardID: question })
-        
-        // temp follow along
         const card = { question, answer, correctAnswer }
-        dispatch(addCard(currentDeck, card))
-        // update async
-        addCardToDeck(currentDeck, card)
+        // dispatch async action
+        dispatch(addCardAsync(currentDeck, card))
         // clear state
         setQuestion('')
         setAnswer('')

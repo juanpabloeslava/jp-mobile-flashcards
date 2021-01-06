@@ -109,6 +109,7 @@ export function addCardToDeck (deck, card) {
                 DECKS_STORAGE_KEY,
                 JSON.stringify(resp)
             )
+            // resp is the an object all the decks with the updated info
             return resp
         })
 }

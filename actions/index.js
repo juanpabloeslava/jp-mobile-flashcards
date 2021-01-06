@@ -1,6 +1,6 @@
 import { ADD_CARD, ADD_DECK, RECEIVE_DECKS } from './actionTypes'
 // data
-import { getAllDecks, saveDeckTitle } from '../utils/api'
+import { getAllDecks, saveDeckTitle, addCardToDeck } from '../utils/api'
 
 export const receiveDecks = decks => {
     return {
@@ -49,7 +49,8 @@ export const addDeckAsync = deckTitle => dispatch => {
         })
 }
 
-export const addCardAsync = () => dispatch => {
+export const addCardAsync = (deck, card) => dispatch => {
     console.log('addCardAsync')
-
+    dispatch(addCard(deck, card))
+    addCardToDeck(deck, card)
 }
