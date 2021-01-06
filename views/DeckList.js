@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native'
 // colors and icons
-import { white, blue } from '../utils/colors'
-// data
-import { getInitialData } from '../utils/api'
+import { colors } from '../utils/colors'
 // redux
 import { useSelector, useDispatch } from 'react-redux'
 import { receiveDecksAsync } from '../actions'
-import { render } from 'react-dom'
 
 const DeckItem = (props) => {
     const { title, questions } = props
@@ -111,7 +108,7 @@ const DeckList = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: white,
+        backgroundColor: colors.white,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -119,7 +116,7 @@ const styles = StyleSheet.create({
         marginBottom: 16
     },
     viewDeckText: {
-        color: blue,
+        color: colors.blue,
         margin: 16
     }
 })
