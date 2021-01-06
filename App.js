@@ -10,21 +10,28 @@
 
 // navigation
 import TabNavigation from './navigation/TabNavigation';
-// others 
-import { StatusBar } from 'expo-status-bar';
+// React and React Native stuff
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, StatusBar, View } from 'react-native'
+import Constants from 'expo-constants'
 // colors and icons
-import { white } from './utils/colors'
+import { colors } from './utils/colors'
 // redux
 import { Provider } from 'react-redux'
 import store from './store'
 
+function MyStatusBar ({backgroundColor, ...props})  {
+  return (
+    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
 
 export default function App() {
   return (
     <Provider store={store} >
-        <StatusBar style="auto" />
+        <MyStatusBar barStyle="light-content" backgroundColor={colors.blue} />
         <TabNavigation />
     </Provider>
   )
@@ -33,7 +40,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: white,
+    backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
   }
