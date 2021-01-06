@@ -8,30 +8,23 @@
 // yarn add redux-logger
 // yarn add redux-thunk
 
-// navigation
-import TabNavigation from './navigation/TabNavigation';
+// navigation and comps
+import TabNavigation from './navigation/TabNavigation'
+import MyStatusBar from './components/MyStatusBar'
 // React and React Native stuff
-import React from 'react';
-import { StyleSheet, StatusBar, View } from 'react-native'
-import Constants from 'expo-constants'
+import React from 'react'
+import { StyleSheet } from 'react-native'
 // colors and icons
 import { colors } from './utils/colors'
 // redux
 import { Provider } from 'react-redux'
 import store from './store'
 
-function MyStatusBar ({backgroundColor, ...props})  {
-  return (
-    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
-      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
-    </View>
-  )
-}
-
 export default function App() {
   return (
     <Provider store={store} >
-        <MyStatusBar barStyle="light-content" backgroundColor={colors.blue} />
+        {/* <MyStatusBar barStyle="light-content" backgroundColor={colors.blue} /> */}
+        <MyStatusBar barStyle="light-content" backgroundColor={colors.blue}/>
         <TabNavigation />
     </Provider>
   )
