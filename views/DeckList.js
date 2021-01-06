@@ -39,7 +39,7 @@ const DeckList = (props) => {
                                 // second arg in function: a key passed into the rendered comp (first arg) as a prop
                                 onPress={() => {
                                     console.log(currentDeck)
-                                    return navigation.navigate('Deck', { deckID: deck })
+                                    return navigation.navigate('Deck Details', { deckID: deck })
                                 }}
                             >
                                 <Text style={styles.viewDeckText}>view deck</Text>

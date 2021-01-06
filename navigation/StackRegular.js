@@ -19,14 +19,24 @@ const StackRegular = () => {
                 <Stack.Screen
                     name="Decks"
                     component={DeckList}
+                    options={{
+                        headerShown: false
+                    }}
+                    
                 />
                 <Stack.Screen
-                    name="Deck Detail"
+                    name="Deck Details"
                     component={Deck}
+                    options={{
+                        headerShown: true
+                    }}
                 />
                 <Stack.Screen
                     name="Add Card"
                     component={AddCard}
+                    options={{
+                        headerShown: true
+                    }}
                 />
             </Stack.Navigator>
     )

@@ -25,7 +25,7 @@ const Deck = (props) => {
     const addCard = () => {
         console.log('will go to add new card')
         // go to the add card view
-        navigation.navigate('AddCard', { deckID: id })
+        navigation.navigate('Add Card', { deckID: id })
     }
 
     // this gives it time to render without error while all the data gets into the state
