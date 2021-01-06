@@ -18,12 +18,14 @@ export const addDeck = deck => {
     }
 }
 
-export const addCard = card => {
+export const addCard = (deck, card) => {
     return {
         type: ADD_CARD,
-        deck
+        deck,
+        card
     }
 }
+
 
 // async actions
 export const receiveDecksAsync = () => dispatch => {
@@ -45,4 +47,9 @@ export const addDeckAsync = deckTitle => dispatch => {
             dispatch(addDeck(deck))
             return deck
         })
+}
+
+export const addCardAsync = () => dispatch => {
+    console.log('addCardAsync')
+
 }
