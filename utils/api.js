@@ -73,7 +73,7 @@ export const saveDeckTitle2 = async (title) => {
     }))
 }
 
-export async function saveDeckTitle(title) {
+export async function saveDeckTitle (title) {
     console.log('saveDeckTitle: ', title)
     const deck = {
         [title]: {
@@ -94,21 +94,21 @@ export async function saveDeckTitle(title) {
 
 // take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title.
 // export const addCardToDeck = (title, card) => {
-export function addCardToDeck (title, card) {
+export function addCardToDeck (deck, card) {
     console.log('addCardToDeck()')
-    // return AsyncStorage.getItem(DECKS_STORAGE_KEY)
-    //     .then(results => {
-    //         const parsedResults = JSON.parse(results)
-    //         return parsedResults
-    //     })
-    //     .then(resp => {
-    //         // set the new card into the decks data on the Asyc Storage
-    //         resp[title].questions.push(card)
-    //         // re-set the AsyncStorage with the updated info
-    //         AsyncStorage.setItem(
-    //             DECKS_STORAGE_KEY,
-    //             JSON.stringify(resp)
-    //         )
-    //         return resp
-    //     })
+    return AsyncStorage.getItem(DECKS_STORAGE_KEY)
+        .then(results => {
+            const parsedResults = JSON.parse(results)
+            return parsedResults
+        })
+        .then(resp => {
+            // set the new card into the decks data on the Asyc Storage
+            resp[deck].questions.push(card)
+            // re-set the AsyncStorage with the updated info
+            AsyncStorage.setItem(
+                DECKS_STORAGE_KEY,
+                JSON.stringify(resp)
+            )
+            return resp
+        })
 }
