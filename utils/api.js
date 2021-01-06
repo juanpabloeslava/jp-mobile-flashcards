@@ -93,8 +93,9 @@ export async function saveDeckTitle(title) {
 
 
 // take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title.
-export const addCardToDeck = (title, card) => {
-    console.log('addCardToDeck')
+// export const addCardToDeck = (title, card) => {
+export function addCardToDeck (title, card) {
+    console.log('addCardToDeck()')
     // return AsyncStorage.getItem(DECKS_STORAGE_KEY)
     //     .then(results => {
     //         const parsedResults = JSON.parse(results)

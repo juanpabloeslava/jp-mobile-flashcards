@@ -15,29 +15,18 @@ const Deck = (props) => {
     const { navigation } = props
     const dispatch = useDispatch()
 
-    // on comp mount
-    // useEffect(() => {
-    //     const decks = useSelector(state => state.decks)
-    //     // const id = props.route.params.deckID
-    //     // const deck = decks[id]
-    //     // return deck
-    //     console.log('decks from state in Deck comp:', decks)
-    // }, [])
-    
-    // // on comp mount
-    // useEffect(() => {
-    //     // get all decks from AsyncStore and put them in the state
-    //     dispatch(receiveDecksAsync())
-
-    // }, [])
-
-    const decks = useSelector(state => state.decks)
     const id = props.route.params.deckID
+    const decks = useSelector(state => state.decks)
     const deck = decks[id]
     console.log('decks from state in Deck comp:', decks)
     console.log('deck in Deck comp:', deck)
 
-    // console.log('deck in Deck comp:', deck)
+    // functions
+    const addCard = () => {
+        console.log('will go to add new card')
+        // go to the add card view
+        navigation.navigate('AddCard', { deckID: id })
+    }
 
     // this gives it time to render without error while all the data gets into the state
     if (deck === null || deck === undefined) {
@@ -57,7 +46,7 @@ const Deck = (props) => {
                 {deck.questions.length} Cards
             </Text>
             <ActionButton 
-                onPress={ () => console.log('add card')}
+                onPress={addCard}
                 text='Add Card'
                 color={colors.blue}
 
