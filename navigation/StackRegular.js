@@ -21,11 +21,11 @@ const StackRegular = () => {
                     component={DeckList}
                 />
                 <Stack.Screen
-                    name="Deck"
+                    name="Deck Detail"
                     component={Deck}
                 />
                 <Stack.Screen
-                    name="AddCard"
+                    name="Add Card"
                     component={AddCard}
                 />
             </Stack.Navigator>
