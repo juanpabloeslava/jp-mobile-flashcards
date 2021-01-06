@@ -18,9 +18,26 @@ const decks = (state = initialState, action) => {
                 ...action.deck
             }
         case ADD_CARD:
-            return {
+            const { question, answer, correctAnswer } = action.card
+            const deck = action.deck
 
-            }
+            return {
+                ...state,
+                // update the current deck
+                [deck]: {
+                    ...state[deck],
+                    // update question prop
+                    questions: [
+                        ...state[deck].questions,
+                        { 
+                            // add question, answer, and correct answer
+                            question,
+                            answer,
+                            correctAnswer
+                        }
+                    ]
+                }
+            }   
         default:
             return state
     }
