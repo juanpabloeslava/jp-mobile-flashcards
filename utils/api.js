@@ -73,7 +73,7 @@ export const saveDeckTitle2 = async (title) => {
     }))
 }
 
-export async function saveDeckTitle (title) {
+export async function saveDeckTitle(title) {
     console.log('saveDeckTitle: ', title)
     const deck = {
         [title]: {
@@ -94,7 +94,7 @@ export async function saveDeckTitle (title) {
 
 // take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title.
 // export const addCardToDeck = (title, card) => {
-export function addCardToDeck (deck, card) {
+export function addCardToDeck(deck, card) {
     console.log('addCardToDeck()')
     return AsyncStorage.getItem(DECKS_STORAGE_KEY)
         .then(results => {

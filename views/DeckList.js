@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native'
 // colors and icons
 import { white, blue } from '../utils/colors'
 // data
@@ -7,6 +7,26 @@ import { getInitialData } from '../utils/api'
 // redux
 import { useSelector, useDispatch } from 'react-redux'
 import { receiveDecksAsync } from '../actions'
+import { render } from 'react-dom'
+
+const DeckItem = (props) => {
+    const { title, questions } = props
+    return (
+        <View key={title} style={styles.question}>
+            <Text>{title}</Text>
+            <Text>{questions.length}</Text>
+            <TouchableOpacity
+                // second arg in function: a key passed into the rendered comp (first arg) as a prop
+                onPress={() => {
+                    console.log(currentDeck)
+                    return navigation.navigate('Deck Details', { deckID: deck })
+                }}
+            >
+                <Text style={styles.viewDeckText}>view deck</Text>
+            </TouchableOpacity>
+        </View>
+    )
+}
 
 const DeckList = (props) => {
 
@@ -19,37 +39,73 @@ const DeckList = (props) => {
         dispatch(receiveDecksAsync())
 
     }, [])
+
+    const decks = useSelector(state => state.decks)
+    console.log('decks obj in  deck list: ', decks)
     
-    const decks = useSelector(state => state.decks) 
-    console.log('decks in  deck list: ', decks)
+    // an array of the decks without the keys, so just the objects
+    const decksData = Object.values(decks)
+    console.log('decksData: ', decksData)
+
+
+    const renderDeckItem = ({ title, questions }) => {
+        // this gives it time to render without error while all the data gets into the state
+        if (title === undefined || questions === undefined) {
+            return (
+                <View style={styles.container}>
+                    <Text>It appears things haven't finished loading.</Text>
+                </View>
+            )
+        }
+        return (
+            <View style={styles.question}>
+                <Text>{title}</Text>
+                <Text>{questions.length}</Text>
+                <TouchableOpacity
+                    // second arg in function: a key passed into the rendered comp (first arg) as a prop
+                    onPress={() => navigation.navigate('Deck Details', { deckID: deck })}
+                >
+                    <Text style={styles.viewDeckText}>view deck</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
 
     return (
         <View style={styles.container}>
-            {
-                Object.keys(decks).map(deck => {
-
-                    const currentDeck = decks[deck]
-                    const { title, questions } = currentDeck
-
-                    return (
-                        <View key={title} style={styles.question}>
-                            <Text>{title}</Text>
-                            <Text>{questions.length}</Text>
-                            <TouchableOpacity
-                                // second arg in function: a key passed into the rendered comp (first arg) as a prop
-                                onPress={() => {
-                                    console.log(currentDeck)
-                                    return navigation.navigate('Deck Details', { deckID: deck })
-                                }}
-                            >
-                                <Text style={styles.viewDeckText}>view deck</Text>
-                            </TouchableOpacity>
-                        </View>
-                    )
-                })
-            }
+            <FlatList
+                data={decksData}
+                renderItem={renderDeckItem}
+            />
         </View>
     )
+    // return (
+    //     <View style={styles.container}>
+    //         {
+    //             Object.keys(decks).map(deck => {
+
+    //                 const currentDeck = decks[deck]
+    //                 const { title, questions } = currentDeck
+
+    //                 return (
+    //                     <View key={title} style={styles.question}>
+    //                         <Text>{title}</Text>
+    //                         <Text>{questions.length}</Text>
+    //                         <TouchableOpacity
+    //                             // second arg in function: a key passed into the rendered comp (first arg) as a prop
+    //                             onPress={() => {
+    //                                 console.log(currentDeck)
+    //                                 return navigation.navigate('Deck Details', { deckID: deck })
+    //                             }}
+    //                         >
+    //                             <Text style={styles.viewDeckText}>view deck</Text>
+    //                         </TouchableOpacity>
+    //                     </View>
+    //                 )
+    //             })
+    //         }
+    //     </View>
+    // )
 }
 
 const styles = StyleSheet.create({
