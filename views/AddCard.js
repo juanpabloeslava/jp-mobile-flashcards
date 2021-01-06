@@ -23,15 +23,7 @@ const AddCard = (props) => {
                 onPress={ () => console.log('Submit card')}
                 text='Submit card'
                 color={colors.blue}
-
             />
-            <TouchableOpacity
-                onPress={submitDeck}
-                title='submit'
-                placeholder="Enter your deck's title"
-            >
-                <Text style={styles.submitBtnText}>submit</Text>
-            </TouchableOpacity>
         </View>
     )
 }
