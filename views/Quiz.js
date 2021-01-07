@@ -22,6 +22,7 @@ const Quiz = (props) => {
     const [showAnswer, setShowAnswer] = useState(false);
     const [answersRigth, setAnswersRigth] = useState(0);
     const [answersWrong, setAnswersWrong] = useState(0);
+    const [resultsPage, setResultsPage] = useState(false);
 
     const decks = useSelector(state => state.decks)
     const deck = decks[deckID]
@@ -36,65 +37,100 @@ const Quiz = (props) => {
 
     // functions
     const submitAnswer = answer => {
-        console.log('submititng')
-
-        if ( displayNumber < totalQuestions) {
-            // check answer
-            if (answer === correctAnswer) {
-                setAnswersRigth(answersRigth + 1)
-                console.log('answer was rigth')
-            }
-            else {
-                setAnswersWrong(answersWrong + 1)
-                console.log('answer was wrong')
-            }
+        // check answer
+        (answer === correctAnswer) 
+            ? (setAnswersRigth(answersRigth + 1)) 
+            : (setAnswersWrong(answersWrong + 1))
+        // go to next question or results page
+        if ( displayNumber !== totalQuestions ) {
             setQuestionNumber(questionNumber + 1)
             setShowAnswer(false)
         }
+        else { setResultsPage(true) }
     }
-    
-    const showPreviousAnswers = answersRigth !== 0 ? `${answersRigth} / ${totalQuestions} ${displayQuestions} right` : null
 
-    return (
-        <View style={styles.container}>
-            <View style={styles.quiz}>
-                <View style={styles.countersContainer}>
-                    <Text style={styles.questionCount}> {`Question number: ${displayNumber}`} </Text>
-                    <Text style={styles.answerCount}> 
-                        {showPreviousAnswers}
-                    </Text>
-                </View>
-                <Text style={styles.title}>
-                    {question}
-                </Text>
-                <ActionButton
-                    onPress={() => setShowAnswer(!showAnswer)}
-                    text={showAnswer === true ? 'Hide Answer' : 'Show Answer'}
-                    color={colors.blue}
-                />
-                {showAnswer === true
-                    ? <View>
-                        <Text style={styles.questionText}>{answer}</Text>
-                        <View style={styles.buttonsContainer}>
-                            <AnswerButton
-                                // onPress={() => console.log('correct')}
-                                onPress={() => submitAnswer('true')}
-                                text='Correct'
-                                color={colors.green}
-                            />
-                            <AnswerButton
-                                // onPress={() => console.log('incorrect')}
-                                onPress={() => submitAnswer('false')}
-                                text='Incorrect'
-                                color={colors.red}
-                            />
-                        </View>
+    const playAgain = () => {
+        // reset everything
+        setQuestionNumber(0)
+        setAnswersRigth(0)
+        setAnswersWrong(0)
+        setShowAnswer(false)
+        setResultsPage(false)
+    }
+
+    const goToDeck = () => navigation.dispatch(CommonActions.goBack())
+
+    if (resultsPage === true) {
+        return (
+            <View style={styles.container}>
+                <View style={styles.quiz}>
+                    {
+                        answersRigth > answersWrong 
+                            ? <Text>Congratulations!</Text>
+                            : <Text>Ouch! It seems you need to study a bit more</Text>
+                    }
+                    <Text>{ ` You got ${answersRigth} / ${totalQuestions} ${displayQuestions} right` }</Text>
+                    <ActionButton
+                        onPress={playAgain}
+                        text='Take the Quiz again'
+                        color={colors.blue}
+                    />
+                    <ActionButton
+                        onPress={goToDeck}
+                        text='Back to Deck'
+                        color={colors.purple}
+                    />
+                    <View style={styles.buttonsContainer}>
                     </View>
-                    : null
-                }
+                </View>
             </View>
-        </View>
-    )
+        )
+    }
+    else {
+        return (
+            <View style={styles.container}>
+                <View style={styles.quiz}>
+                    <View style={styles.countersContainer}>
+                        <Text style={styles.questionCount}> {`Question number: ${displayNumber}`} </Text>
+                        <Text style={styles.answerCount}>
+                            {
+                                answersRigth !== 0 ? `${answersRigth} / ${totalQuestions} ${displayQuestions} right` : null
+                            }
+                        </Text>
+                    </View>
+                    <Text style={styles.title}>
+                        {question}
+                    </Text>
+                    <ActionButton
+                        onPress={() => setShowAnswer(!showAnswer)}
+                        text={showAnswer === true ? 'Hide Answer' : 'Show Answer'}
+                        color={colors.blue}
+                    />
+                    {showAnswer === true
+                        ? <View>
+                            <Text style={styles.questionText}>{answer}</Text>
+                            <View style={styles.buttonsContainer}>
+                                <AnswerButton
+                                    // onPress={() => console.log('correct')}
+                                    onPress={() => submitAnswer('true')}
+                                    text='Correct'
+                                    color={colors.green}
+                                />
+                                <AnswerButton
+                                    // onPress={() => console.log('incorrect')}
+                                    onPress={() => submitAnswer('false')}
+                                    text='Incorrect'
+                                    color={colors.red}
+                                />
+                            </View>
+                        </View>
+                        : null
+                    }
+                </View>
+            </View>
+        )
+    }
+
 }
 
 const styles = StyleSheet.create({
