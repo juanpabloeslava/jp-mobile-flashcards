@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 // colors and icons
 import { colors } from '../utils/colors'
 
-const ActionButton = (props) => {
+const AnswerButton = (props) => {
 
     const { onPress, text, color } = props
 
@@ -21,8 +21,9 @@ const ActionButton = (props) => {
 
 const styles = StyleSheet.create({
     button: {
+        flex: 1,
         justifyContent: 'center',
-        minWidth: 220,
+        // minWidth: 100,
         height: 48,
         padding: 8,
         borderRadius: 4,
@@ -35,4 +36,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ActionButton;
+export default AnswerButton;
