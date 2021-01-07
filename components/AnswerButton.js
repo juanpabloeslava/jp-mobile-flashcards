@@ -12,7 +12,7 @@ const AnswerButton = (props) => {
             onPress={onPress}
             style={ [ styles.button, { backgroundColor: color } ] }
         >
-            <Text style={styles.submitBtnText}>
+            <Text style={styles.btnText}>
                 {text}
             </Text>
         </TouchableOpacity>
@@ -23,14 +23,14 @@ const styles = StyleSheet.create({
     button: {
         flex: 1,
         justifyContent: 'center',
-        // minWidth: 100,
+        minWidth: 96,
         height: 48,
         padding: 8,
         borderRadius: 4,
         overflow: 'hidden',
         margin: 16
     },
-    submitBtnText: {
+    btnText: {
         color: colors.white,
         textAlign: 'center'
     }

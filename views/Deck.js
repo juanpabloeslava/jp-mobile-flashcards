@@ -78,13 +78,12 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 16
     },
     deck: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        margin: 16,
+        margin: 12,
         backgroundColor: colors.white2,
         alignSelf: 'stretch',
         borderRadius: 8,
