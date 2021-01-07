@@ -37,25 +37,29 @@ const Deck = (props) => {
         )
     }
 
+    const cards = deck.questions.length === 1 ? 'Card' : 'Cards'
+
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>
-                {deck.title}
-            </Text>
-            <Text style={ { margin: 16 } }>
-                {deck.questions.length} Cards
-            </Text>
-            <ActionButton 
-                onPress={addCard}
-                text='Add Card'
-                color={colors.blue}
+            <View style={styles.deck}>
+                <Text style={styles.title}>
+                    {deck.title}
+                </Text>
+                <Text style={ { margin: 16 } }>
+                    {`${deck.questions.length} ${cards}`}
+                </Text>
+                <ActionButton 
+                    onPress={addCard}
+                    text='Add Card'
+                    color={colors.blue}
 
-            />
-            <ActionButton 
-                onPress={ () => console.log('take quiz')}
-                text='Take Quiz'
-                color={colors.green}
-            />
+                />
+                <ActionButton 
+                    onPress={ () => console.log('take quiz')}
+                    text='Take Quiz'
+                    color={colors.green}
+                />
+            </View>
         </View>
     )
 }
@@ -66,6 +70,23 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
         alignItems: 'center',
         justifyContent: 'center',
+        padding: 16
+    },
+    deck: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 16,
+        backgroundColor: colors.white2,
+        alignSelf: 'stretch',
+        borderRadius: 8,
+        shadowRadius: 8,
+        shadowColor: 'rgba(0, 0, 0, 0.16)',
+        shadowOffset: {
+            width: 0,
+            height: 3
+        }
+
     },
     title: {
         fontSize: 24,
