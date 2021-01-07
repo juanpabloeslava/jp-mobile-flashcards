@@ -32,6 +32,11 @@ const Quiz = (props) => {
     const answer = deck.questions[questionNumber].answer
     const correctAnswer = deck.questions[questionNumber].correctAnswer
 
+    // functions
+    const submitAnswer = () => {
+
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.quiz}>
@@ -46,7 +51,7 @@ const Quiz = (props) => {
                 />
                 {showAnswer === true
                     ? <View>
-                        <Text style={{ marginBottom: 32 }}>{answer}</Text>
+                        <Text style={styles.questionText}>{answer}</Text>
                         <View style={styles.buttonsContainer}>
                             <AnswerButton
                                 onPress={() => console.log('correct')}
@@ -62,9 +67,6 @@ const Quiz = (props) => {
                     </View>
                     : null
                 }
-                <Text>
-                    {correctAnswer}
-                </Text>
             </View>
         </View>
     )
@@ -96,15 +98,23 @@ const styles = StyleSheet.create({
 
     },
     questionCount: {
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        margin: 16
     },
     title: {
         fontSize: 24,
         color: colors.blue,
         margin: 16
     },
+    questionText: {
+        fontSize: 22,
+        margin: 16
+
+    },
     buttonsContainer: {
-        // flex: 1,
         flexDirection: 'row'
     }
 })
