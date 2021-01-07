@@ -20,6 +20,8 @@ const Quiz = (props) => {
     // local state
     const [questionNumber, setQuestionNumber] = useState(0);        // 
     const [showAnswer, setShowAnswer] = useState(false);
+    const [answersRigth, setAnswersRigth] = useState(0);
+    const [answersWrong, setAnswersWrong] = useState(0);
 
     const decks = useSelector(state => state.decks)
     const deck = decks[deckID]
@@ -30,17 +32,38 @@ const Quiz = (props) => {
 
     const question = deck.questions[questionNumber].question
     const answer = deck.questions[questionNumber].answer
-    const correctAnswer = deck.questions[questionNumber].correctAnswer
+    const correctAnswer = deck.questions[questionNumber].correctAnswer.toLowerCase()
 
     // functions
-    const submitAnswer = () => {
+    const submitAnswer = answer => {
+        console.log('submititng')
 
+        if ( displayNumber < totalQuestions) {
+            // check answer
+            if (answer === correctAnswer) {
+                setAnswersRigth(answersRigth + 1)
+                console.log('answer was rigth')
+            }
+            else {
+                setAnswersWrong(answersWrong + 1)
+                console.log('answer was wrong')
+            }
+            setQuestionNumber(questionNumber + 1)
+            setShowAnswer(false)
+        }
     }
+    
+    const showPreviousAnswers = answersRigth !== 0 ? `${answersRigth} / ${totalQuestions} ${displayQuestions} right` : null
 
     return (
         <View style={styles.container}>
             <View style={styles.quiz}>
-                <Text style={styles.questionCount}> {`${displayNumber} / ${totalQuestions} ${displayQuestions}`} </Text>
+                <View style={styles.countersContainer}>
+                    <Text style={styles.questionCount}> {`Question number: ${displayNumber}`} </Text>
+                    <Text style={styles.answerCount}> 
+                        {showPreviousAnswers}
+                    </Text>
+                </View>
                 <Text style={styles.title}>
                     {question}
                 </Text>
@@ -54,12 +77,14 @@ const Quiz = (props) => {
                         <Text style={styles.questionText}>{answer}</Text>
                         <View style={styles.buttonsContainer}>
                             <AnswerButton
-                                onPress={() => console.log('correct')}
+                                // onPress={() => console.log('correct')}
+                                onPress={() => submitAnswer('true')}
                                 text='Correct'
                                 color={colors.green}
                             />
                             <AnswerButton
-                                onPress={() => console.log('incorrect')}
+                                // onPress={() => console.log('incorrect')}
+                                onPress={() => submitAnswer('false')}
                                 text='Incorrect'
                                 color={colors.red}
                             />
@@ -77,15 +102,14 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.white,
         alignItems: 'center',
-        justifyContent: 'center',
-        padding: 16
+        justifyContent: 'center'
     },
     quiz: {
         flex: 1,
-        padding: 16,
+        padding: 12,
+        margin: 12,
         justifyContent: 'center',
         alignItems: 'center',
-        margin: 16,
         backgroundColor: colors.white2,
         alignSelf: 'stretch',
         borderRadius: 8,
@@ -97,20 +121,35 @@ const styles = StyleSheet.create({
         }
 
     },
-    questionCount: {
+    countersContainer: {
         alignSelf: 'flex-start',
+        justifyContent: 'flex-start',
         position: 'absolute',
         left: 0,
         top: 0,
-        margin: 16
+        margin: 12
+    },
+    questionCount: {
+        // alignSelf: 'flex-start',
+        // position: 'absolute',
+        // left: 0,
+        // top: 0,
+        // margin: 4
+    },
+    answerCount: {
+        // alignSelf: 'flex-start',
+        // position: 'absolute',
+        // top: 0,
+        // left: 0,
+        // margin: 4
     },
     title: {
-        fontSize: 24,
+        fontSize: 20,
         color: colors.blue,
         margin: 16
     },
     questionText: {
-        fontSize: 22,
+        fontSize: 18,
         margin: 16
 
     },
