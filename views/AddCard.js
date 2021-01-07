@@ -23,7 +23,6 @@ const AddCard = (props) => {
     // current deck
     const { navigation } = props
     const currentDeck = props.route.params.deckID
-    console.log('current deck id in add new card: ', currentDeck)
 
     // functions
     const handleChangeQuestion = text => setQuestion(text)

@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     },
     card: {
         alignItems: 'center',
-        justifyContent: 'start',
+        justifyContent: 'flex-start',
         backgroundColor: colors.white2,
         margin: 12,
         borderRadius: 8,
