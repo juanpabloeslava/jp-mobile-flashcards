@@ -61,10 +61,8 @@ const Deck = (props) => {
                     onPress={addCard}
                     text='Add Card'
                     color={colors.blue}
-
                 />
                 <ActionButton 
-                    // onPress={ () => navigation.navigate('Quiz', { deckID: id })}
                     onPress={takeQuiz}
                     text='Take Quiz'
                     color={colors.green}

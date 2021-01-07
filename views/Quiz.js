@@ -10,20 +10,62 @@ import { useSelector, useDispatch } from 'react-redux'
 import { addCardAsync } from '../actions'
 // comps
 import ActionButton from '../components/ActionButton'
+import AnswerButton from '../components/AnswerButton'
 
 const Quiz = (props) => {
 
     const { navigation } = props
     const deckID = props.route.params.deckID
 
+    // local state
+    const [questionNumber, setQuestionNumber] = useState(0);        // 
+    const [showAnswer, setShowAnswer] = useState(false);
+
     const decks = useSelector(state => state.decks)
     const deck = decks[deckID]
-    console.log('decks from state in Quiz comp:', decks)
-    console.log('quiz on deck:', deck)
+
+    const totalQuestions = deck.questions.length
+    const displayNumber = questionNumber + 1
+    const displayQuestions = totalQuestions === 1 ? 'Question' : 'Questions'
+
+    const question = deck.questions[questionNumber].question
+    const answer = deck.questions[questionNumber].answer
+    const correctAnswer = deck.questions[questionNumber].correctAnswer
 
     return (
         <View style={styles.container}>
-            <Text> Quiz view </Text>
+            <View style={styles.quiz}>
+                <Text style={styles.questionCount}> {`${displayNumber} / ${totalQuestions} ${displayQuestions}`} </Text>
+                <Text style={styles.title}>
+                    {question}
+                </Text>
+                <ActionButton
+                    onPress={() => setShowAnswer(!showAnswer)}
+                    text={showAnswer === true ? 'Hide Answer' : 'Show Answer'}
+                    color={colors.blue}
+                />
+                {showAnswer === true
+                    ? <View>
+                        <Text style={{ marginBottom: 32 }}>{answer}</Text>
+                        <View style={styles.buttonsContainer}>
+                            <AnswerButton
+                                onPress={() => console.log('correct')}
+                                text='Correct'
+                                color={colors.green}
+                            />
+                            <AnswerButton
+                                onPress={() => console.log('incorrect')}
+                                text='Incorrect'
+                                color={colors.red}
+                            />
+                        </View>
+                    </View>
+                    : null
+                }
+                <Text>
+                    {correctAnswer}
+                </Text>
+            </View>
         </View>
     )
 }
@@ -34,7 +76,37 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
         alignItems: 'center',
         justifyContent: 'center',
+        padding: 16
     },
+    quiz: {
+        flex: 1,
+        padding: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 16,
+        backgroundColor: colors.white2,
+        alignSelf: 'stretch',
+        borderRadius: 8,
+        shadowRadius: 8,
+        shadowColor: 'rgba(0, 0, 0, 0.16)',
+        shadowOffset: {
+            width: 0,
+            height: 3
+        }
+
+    },
+    questionCount: {
+        alignSelf: 'flex-start'
+    },
+    title: {
+        fontSize: 24,
+        color: colors.blue,
+        margin: 16
+    },
+    buttonsContainer: {
+        // flex: 1,
+        flexDirection: 'row'
+    }
 })
 
 export default Quiz;
