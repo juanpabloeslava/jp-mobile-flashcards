@@ -9,6 +9,7 @@ import DeckList from '../views/DeckList'
 import Deck from '../views/Deck';
 import AddCard from '../views/AddCard';
 import DeckListClass from '../views/DeckListClass';
+import DeckFlatList from '../views/DeckFlatList';
 
 
 const Stack = createStackNavigator();
@@ -19,7 +20,8 @@ const StackRegular = () => {
             <Stack.Navigator>
                 <Stack.Screen
                     name="Decks"
-                    component={DeckList}
+                    component={DeckFlatList}
+                    // component={DeckList}
                     // component={DeckListClass}
                     options={{
                         headerShown: false

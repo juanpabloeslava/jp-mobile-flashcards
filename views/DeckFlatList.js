@@ -1,108 +1,87 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native'
 // colors and icons
 import { colors } from '../utils/colors'
 // redux
-import { useSelector, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'       // couldn¡t make it work with useSelector(), had to use connect() instead 
 import { receiveDecksAsync } from '../actions'
 
-const DeckItem = (props) => {
-    const { title, questions } = props
-    return (
-        <View key={title} style={styles.question}>
-            <Text>{title}</Text>
-            <Text>{questions.length}</Text>
-            <TouchableOpacity
-                // second arg in function: a key passed into the rendered comp (first arg) as a prop
-                onPress={() => {
-                    console.log(currentDeck)
-                    return navigation.navigate('Deck Details', { deckID: deck })
-                }}
-            >
-                <Text style={styles.viewDeckText}>view deck</Text>
-            </TouchableOpacity>
-        </View>
-    )
-}
 
 const DeckFlatList = (props) => {
 
-    const { navigation } = props
-    const dispatch = useDispatch()
+    const { navigation, decks, dispatch } = props
+    console.log('decks from connect state: ', decks)
 
     // on comp mount
     useEffect(() => {
         // get all decks from AsyncStore and put them in the state
         dispatch(receiveDecksAsync())
-
     }, [])
 
-    const decks = useSelector(state => state.decks)
-    console.log('decks obj in  deck list: ', decks)
+    // functions
+    const renderDeckItem = ({ item }) => {
 
-    // an array of the decks without the keys, so just the objects
-    if (Object.entries(decks).length === 0) {
-        console.log('this is cero: ', decks)
+        const { title, questions } = item
+
+        const cards = questions.length === 1 ? 'Card' : 'Cards'
+
         return (
-            <View style={styles.container}>
-                <Text> that was 0</Text>
-            </View>
-        )
-
-    } else {
-        console.log('this is NOT cero: ', decks)
-        // functions
-        const renderDeckItem = ({ title, questions }) => {
-            // this gives it time to render without error while all the data gets into the state
-            if (title === undefined || questions === undefined) {
-                return (
-                    <View style={styles.container}>
-                        <Text>It appears things haven't finished loading.</Text>
-                    </View>
-                )
-            }
-            return (
-                <View style={styles.question}>
-                    <Text>{title}</Text>
-                    <Text>{questions.length}</Text>
-                    <TouchableOpacity
-                        // second arg in function: a key passed into the rendered comp (first arg) as a prop
-                        onPress={() => navigation.navigate('Deck Details', { deckID: deck })}
-                    >
-                        <Text style={styles.viewDeckText}>view deck</Text>
-                    </TouchableOpacity>
-                </View>
-            )
-        }
-
-        const decksData = Object.values(decks)
-        console.log('decksData this: ', decksData)
-    
-        return (
-            <View style={styles.container}>
-                <FlatList
-                    data={decksData}
-                    renderItem={renderDeckItem}
-                />
-            </View>
+            <TouchableOpacity
+                // second arg in function: will be available in the comp in props.route.params.deckID
+                onPress={() => navigation.navigate('Deck Details', { deckID: title })}
+                style={styles.card}
+            >
+                <Text style={styles.title}> 
+                    {title} 
+                </Text>
+                <Text>
+                    {`${questions.length} ${cards}`}
+                </Text>
+            </TouchableOpacity>
         )
     }
+
+    return (
+        <View style={styles.container}>
+            <FlatList
+                data={decks}
+                renderItem={renderDeckItem}
+            />
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.white,
-        alignItems: 'center',
-        justifyContent: 'center',
+        padding: 16,
     },
-    question: {
-        marginBottom: 16
-    },
-    viewDeckText: {
+    title: {
+        fontSize: 24,
         color: colors.blue,
         margin: 16
-    }
+    },
+    card: {
+        alignItems: 'center',
+        justifyContent: 'start',
+        backgroundColor: colors.white2,
+        margin: 12,
+        borderRadius: 8,
+        height: 120,
+        shadowRadius: 8,
+        shadowColor: 'rgba(0, 0, 0, 0.16)',
+        shadowOffset: {
+            width: 0,
+            height: 3
+        }
+    },
 })
 
-export default DeckFlatList
+const mapStateToProps = ({ decks }) => {
+    return {
+        decks: Object.values(decks)
+    }
+}
+
+export default connect(mapStateToProps)(DeckFlatList)
