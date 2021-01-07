@@ -28,6 +28,15 @@ const Deck = (props) => {
         navigation.navigate('Add Card', { deckID: id })
     }
 
+    const takeQuiz = () => {
+        if (deck.questions.length === 0) {
+            alert('There are no Cards on this Deck. Add some Cards first to study.')
+        }
+        else {
+            navigation.navigate('Quiz', { deckID: id })
+        }
+    }
+
     // this gives it time to render without error while all the data gets into the state
     if (deck === null || deck === undefined) {
         return (
@@ -55,7 +64,8 @@ const Deck = (props) => {
 
                 />
                 <ActionButton 
-                    onPress={ () => navigation.navigate('Quiz', { deckID: id })}
+                    // onPress={ () => navigation.navigate('Quiz', { deckID: id })}
+                    onPress={takeQuiz}
                     text='Take Quiz'
                     color={colors.green}
                 />
