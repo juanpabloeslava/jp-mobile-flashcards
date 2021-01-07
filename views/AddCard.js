@@ -6,8 +6,6 @@ import { CommonActions } from '@react-navigation/native'
 import { colors } from '../utils/colors'
 // reducers and actions
 import { useDispatch } from 'react-redux'
-// import { addCardAsync } from '../actions'
-// temp data and temp actions
 import { addCardAsync } from '../actions'
 // comps
 import ActionButton from '../components/ActionButton'

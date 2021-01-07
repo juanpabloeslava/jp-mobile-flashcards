@@ -10,6 +10,7 @@ import Deck from '../views/Deck';
 import AddCard from '../views/AddCard';
 import DeckListClass from '../views/DeckListClass';
 import DeckFlatList from '../views/DeckFlatList';
+import Quiz from '../views/Quiz';
 
 
 const Stack = createStackNavigator();
@@ -38,6 +39,13 @@ const StackRegular = () => {
                 <Stack.Screen
                     name="Add Card"
                     component={AddCard}
+                    options={{
+                        headerShown: true
+                    }}
+                />
+                <Stack.Screen
+                    name="Quiz"
+                    component={Quiz}
                     options={{
                         headerShown: true
                     }}
