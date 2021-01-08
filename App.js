@@ -7,6 +7,7 @@
 // yarn add @react-navigation/material-top-tabs react-native-tab-view
 // yarn add redux-logger
 // yarn add redux-thunk
+// yarn add react-native-simple-radio-button
 
 // navigation and comps
 import TabNavigation from './navigation/TabNavigation'

@@ -35,7 +35,7 @@ const Quiz = (props) => {
     // question info
     const question = deck.questions[questionNumber].question
     const answer = deck.questions[questionNumber].answer
-    const correctAnswer = deck.questions[questionNumber].correctAnswer.toLowerCase()
+    const correctAnswer = deck.questions[questionNumber].correctAnswer
 
     // functions
     const submitAnswer = answer => {
@@ -117,12 +117,12 @@ const Quiz = (props) => {
                             <Text style={styles.questionText}>{answer}</Text>
                             <View style={styles.buttonsContainer}>
                                 <AnswerButton
-                                    onPress={() => submitAnswer('true')}
+                                    onPress={() => submitAnswer(true)}
                                     text='Correct'
                                     color={colors.green}
                                 />
                                 <AnswerButton
-                                    onPress={() => submitAnswer('false')}
+                                    onPress={() => submitAnswer(true)}
                                     text='Incorrect'
                                     color={colors.red}
                                 />

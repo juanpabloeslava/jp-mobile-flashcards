@@ -9,17 +9,17 @@ import { useDispatch } from 'react-redux'
 import { addCardAsync } from '../actions'
 // comps
 import ActionButton from '../components/ActionButton'
-
+import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button'
 
 const AddCard = (props) => {
 
-    
+
     // local state and dispatch
     const dispatch = useDispatch()
     const [question, setQuestion] = useState('');
     const [answer, setAnswer] = useState('');
-    const [correctAnswer, setCorrectAnswer] = useState('');
-    
+    const [correctAnswer, setCorrectAnswer] = useState(true);
+
     // current deck
     const { navigation } = props
     const currentDeck = props.route.params.deckID
@@ -27,7 +27,7 @@ const AddCard = (props) => {
     // functions
     const handleChangeQuestion = text => setQuestion(text)
     const handleChangeAnswer = text => setAnswer(text)
-    const handleChangeCorrectAnswer = text => setCorrectAnswer(text)
+    const handleChangeCorrectAnswer = value => setCorrectAnswer(value)
 
     const submitCard = () => {
         console.log('card was submitted')
@@ -41,6 +41,11 @@ const AddCard = (props) => {
         // go to deck
         navigation.dispatch(CommonActions.goBack())
     }
+
+    const radio_props = [
+        { label: 'Correct', value: true },
+        { label: 'Incorrect', value: false }
+    ]
 
     return (
         <KeyboardAvoidingView behavior='padding' style={styles.container}>
@@ -64,17 +69,17 @@ const AddCard = (props) => {
                     onChangeText={handleChangeAnswer}
                 />
             </View>
-            <Text>
-                Correct Answer (true or false)
+            <Text style={{ marginBottom: 16}}>
+                Is this answer correct?
             </Text>
-            <View style={styles.inputContainer}>
-                <TextInput
-                    style={styles.input}
-                    value={correctAnswer}
-                    onChangeText={handleChangeCorrectAnswer}
-                />
-            </View>
-            <ActionButton 
+            <RadioForm
+                radio_props={radio_props}
+                initial={true}
+                formHorizontal={true}
+                labelHorizontal={false}
+                onPress={handleChangeCorrectAnswer}
+            />
+            <ActionButton
                 onPress={submitCard}
                 text='Submit card'
                 color={colors.blue}
