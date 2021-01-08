@@ -1,68 +1,57 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { getInitialData } from './api'
+// import { Notifications, Permissions } from 'expo'
+import * as Notifications from 'expo-notifications'
+import * as Permissions from 'expo-permissions'
 
-const DECKS_STORAGE_KEY = 'MobileCards:Decks'
+const NOTIFICATION_KEY = 'MobileCards:Notification'
 
-// initial helper methods
 
-// return all of the decks along with their titles, questions, and answers.
-export const getAllDecks_depr = async () => {
-    AsyncStorage.getItem(DECKS_STORAGE_KEY)
-        .then(results => {
-            // if there's no previous data, use the dummy data
-            if (results === null) {
-                AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(getInitialData()))
-                console.log('initialData on getAllDecks: ', getInitialData())
-                return getInitialData()
-            }
-            // if there's some data already, use it
-            else {
-                return JSON.parse(results)
-            }
-        })
-}
+export function clearLocalNotification () {
+    return AsyncStorage.removeItem(NOTIFICATION_KEY)
+      .then(Notifications.cancelAllScheduledNotificationsAsync)
+  }
 
-// export const getAllDecks = async () => {
-export async function getAllDecks () {
-    try {
-        const results = await AsyncStorage.getItem(DECKS_STORAGE_KEY)
-        // if results are available, return them, if not, use dummy data
-        if (results) {
-            const data = JSON.parse(results)
-            return data
-        } else {
-            await AsyncStorage.setItem(
-                DECKS_STORAGE_KEY,
-                JSON.stringify(getInitialData())
-            )
-            return getInitialData()
+function createNotification() {
+    return {
+        title: 'Log your stats!',
+        body: "Don't forget to study today. Take a quiz, it won't take long!",
+        ios: {
+            sound: true,
+        },
+        android: {
+            sound: true,
+            priority: 'high',
+            sticky: false,
+            vibrate: true,
         }
-    } catch (error) {
-        await AsyncStorage.setItem(
-            DECKS_STORAGE_KEY,
-            JSON.stringify(getInitialData())
-        )
-        return getInitialData()
     }
 }
 
-// take in a single id argument and return the deck associated with that id.
-export const getDeck = (id) => {
-    console.log('getDeck')
-}
-
-// take in a single title argument and add it to the decks
-export const saveDeckTitle = async (title) => {
-    console.log('saveDeckTitle')
-    AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify({
-        [title]: {
-            title: title,
-            questions: []
+export function setLocalNotification () {
+    AsyncStorage.getItem(NOTIFICATION_KEY)
+      .then(JSON.parse)
+      .then((data) => {
+        if (data === null) {
+          Permissions.askAsync(Permissions.NOTIFICATIONS)
+            .then(({ status }) => {
+              if (status === 'granted') {
+                Notifications.cancelAllScheduledNotificationsAsync()
+  
+                let tomorrow = new Date()
+                tomorrow.setDate(tomorrow.getDate() + 1)
+                tomorrow.setHours(10)
+                tomorrow.setMinutes(0)
+  
+                Notifications.scheduleLocalNotificationAsync(
+                  createNotification(),
+                  {
+                    time: tomorrow,
+                    repeat: 'day',
+                  }
+                )
+                AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
+              }
+            })
         }
-    }))
-}
-
-// take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title.
-export const addCardToDeck = (title, card) => {
-    console.log('addCardToDeck')
-}
+      })
+  }

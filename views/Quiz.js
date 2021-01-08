@@ -10,6 +10,8 @@ import { useSelector } from 'react-redux'
 // comps
 import ActionButton from '../components/ActionButton'
 import AnswerButton from '../components/AnswerButton'
+// notifications
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 const Quiz = (props) => {
 
@@ -37,16 +39,16 @@ const Quiz = (props) => {
     const answer = deck.questions[questionNumber].answer
     const correctAnswer = deck.questions[questionNumber].correctAnswer
 
-    
+
 
     // functions
     const submitAnswer = answer => {
         // check answer
-        (answer === correctAnswer) 
-            ? (setAnswersRigth(answersRigth + 1)) 
+        (answer === correctAnswer)
+            ? (setAnswersRigth(answersRigth + 1))
             : (setAnswersWrong(answersWrong + 1))
         // go to next question or results page
-        if ( displayNumber !== totalQuestions ) {
+        if (displayNumber !== totalQuestions) {
             setQuestionNumber(questionNumber + 1)
             setShowAnswer(false)
         }
@@ -54,6 +56,9 @@ const Quiz = (props) => {
     }
 
     const playAgain = () => {
+        // clear local notification
+        clearLocalNotification()
+            .then(setLocalNotification)
         // reset everything
         setQuestionNumber(0)
         setAnswersRigth(0)
@@ -62,21 +67,27 @@ const Quiz = (props) => {
         setResultsPage(false)
     }
 
-    const goToDeck = () => navigation.dispatch(CommonActions.goBack())
+    const goToDeck = () => {
+        // clear local notification
+        clearLocalNotification()
+            .then(setLocalNotification)
+        // go to deck
+        navigation.dispatch(CommonActions.goBack())
+    }
 
     if (resultsPage === true) {
         return (
             <View style={styles.container}>
-                <View 
-                style={[styles.quiz, answersRigth > answersWrong ? {backgroundColor: colors.green} : {backgroundColor: colors.red}]}
+                <View
+                    style={[styles.quiz, answersRigth > answersWrong ? { backgroundColor: colors.green } : { backgroundColor: colors.red }]}
                 >
                     {
-                        answersRigth > answersWrong 
+                        answersRigth > answersWrong
                             ? <Text style={styles.resultsText}>Congratulations!</Text>
                             : <Text style={styles.resultsText}>It seems you need to study a bit more</Text>
                     }
                     <Text style={styles.resultsText}>
-                        { ` You got ${answersRigth} / ${totalQuestions} ${displayQuestions} right` }
+                        {` You got ${answersRigth} / ${totalQuestions} ${displayQuestions} right`}
                     </Text>
                     <ActionButton
                         onPress={playAgain}
