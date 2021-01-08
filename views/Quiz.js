@@ -37,6 +37,8 @@ const Quiz = (props) => {
     const answer = deck.questions[questionNumber].answer
     const correctAnswer = deck.questions[questionNumber].correctAnswer
 
+    
+
     // functions
     const submitAnswer = answer => {
         // check answer
