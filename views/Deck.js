@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { StyleSheet, Text, View, Animated } from 'react-native'
 // colors and icons
 import { colors } from '../utils/colors'
 // comps
@@ -20,6 +20,20 @@ const Deck = (props) => {
     const deck = decks[id]
     console.log('decks from state in Deck comp:', decks)
     console.log('deck in Deck comp:', deck)
+
+    // animation state
+    const [opacity, setOpacity] = useState( new Animated.Value(0) )
+    
+    // on comp mount
+    useEffect(() => {
+        // handle opacity animation
+        Animated.timing( opacity, {
+            toValue: 1,
+            duration: 1000,
+            useNativeDriver: true
+        }).start()
+    }, [Animated])
+
 
     // functions
     const addCard = () => {
@@ -50,7 +64,7 @@ const Deck = (props) => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.deck}>
+            <Animated.View style={[styles.deck, {opacity}]}>
                 <Text style={styles.title}>
                     {deck.title}
                 </Text>
@@ -67,7 +81,7 @@ const Deck = (props) => {
                     text='Take Quiz'
                     color={colors.green}
                 />
-            </View>
+            </Animated.View>
         </View>
     )
 }
