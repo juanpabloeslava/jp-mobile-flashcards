@@ -9,6 +9,9 @@
 // yarn add redux-thunk
 // yarn add react-native-simple-radio-button
 
+// expo install expo-notifications
+// expo install expo-permissions
+
 // navigation and comps
 import TabNavigation from './navigation/TabNavigation'
 import MyStatusBar from './components/MyStatusBar'
@@ -20,15 +23,24 @@ import { colors } from './utils/colors'
 // redux
 import { Provider } from 'react-redux'
 import store from './store'
+// notifications
+import { setLocalNotification } from './utils/helpers'
 
-export default function App() {
-  return (
-    <Provider store={store} >
-        {/* <MyStatusBar barStyle="light-content" backgroundColor={colors.blue} /> */}
-        <MyStatusBar barStyle="light-content" backgroundColor={colors.blue}/>
-        <TabNavigation />
-    </Provider>
-  )
+export default class App extends React.Component {
+  
+  componentDidMount() {
+    setLocalNotification()
+  }
+  
+  render () {
+    return (
+      <Provider store={store} >
+          {/* <MyStatusBar barStyle="light-content" backgroundColor={colors.blue} /> */}
+          <MyStatusBar barStyle="light-content" backgroundColor={colors.blue}/>
+          <TabNavigation />
+      </Provider>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
