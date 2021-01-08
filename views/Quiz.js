@@ -2,12 +2,11 @@
 import { CommonActions } from '@react-navigation/native'
 // react and react native
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 // colors and icons
 import { colors } from '../utils/colors'
-// reducers and actions
-import { useSelector, useDispatch } from 'react-redux'
-import { addCardAsync } from '../actions'
+// redux
+import { useSelector } from 'react-redux'
 // comps
 import ActionButton from '../components/ActionButton'
 import AnswerButton from '../components/AnswerButton'
@@ -18,19 +17,22 @@ const Quiz = (props) => {
     const deckID = props.route.params.deckID
 
     // local state
-    const [questionNumber, setQuestionNumber] = useState(0);        // 
-    const [showAnswer, setShowAnswer] = useState(false);
-    const [answersRigth, setAnswersRigth] = useState(0);
-    const [answersWrong, setAnswersWrong] = useState(0);
-    const [resultsPage, setResultsPage] = useState(false);
+    const [questionNumber, setQuestionNumber] = useState(0)
+    const [showAnswer, setShowAnswer] = useState(false)
+    const [answersRigth, setAnswersRigth] = useState(0)
+    const [answersWrong, setAnswersWrong] = useState(0)
+    const [resultsPage, setResultsPage] = useState(false)
 
+    // decks from store
     const decks = useSelector(state => state.decks)
     const deck = decks[deckID]
 
+    // show progress
     const totalQuestions = deck.questions.length
     const displayNumber = questionNumber + 1
     const displayQuestions = totalQuestions === 1 ? 'Question' : 'Questions'
 
+    // question info
     const question = deck.questions[questionNumber].question
     const answer = deck.questions[questionNumber].answer
     const correctAnswer = deck.questions[questionNumber].correctAnswer.toLowerCase()
@@ -63,13 +65,17 @@ const Quiz = (props) => {
     if (resultsPage === true) {
         return (
             <View style={styles.container}>
-                <View style={styles.quiz}>
+                <View 
+                style={[styles.quiz, answersRigth > answersWrong ? {backgroundColor: colors.green} : {backgroundColor: colors.red}]}
+                >
                     {
                         answersRigth > answersWrong 
-                            ? <Text>Congratulations!</Text>
-                            : <Text>Ouch! It seems you need to study a bit more</Text>
+                            ? <Text style={styles.resultsText}>Congratulations!</Text>
+                            : <Text style={styles.resultsText}>It seems you need to study a bit more</Text>
                     }
-                    <Text>{ ` You got ${answersRigth} / ${totalQuestions} ${displayQuestions} right` }</Text>
+                    <Text style={styles.resultsText}>
+                        { ` You got ${answersRigth} / ${totalQuestions} ${displayQuestions} right` }
+                    </Text>
                     <ActionButton
                         onPress={playAgain}
                         text='Take the Quiz again'
@@ -91,8 +97,8 @@ const Quiz = (props) => {
             <View style={styles.container}>
                 <View style={styles.quiz}>
                     <View style={styles.countersContainer}>
-                        <Text style={styles.questionCount}> {`Question number: ${displayNumber}`} </Text>
-                        <Text style={styles.answerCount}>
+                        <Text> {`Question number: ${displayNumber}`} </Text>
+                        <Text>
                             {
                                 answersRigth !== 0 ? `${answersRigth} / ${totalQuestions} ${displayQuestions} right` : null
                             }
@@ -111,13 +117,11 @@ const Quiz = (props) => {
                             <Text style={styles.questionText}>{answer}</Text>
                             <View style={styles.buttonsContainer}>
                                 <AnswerButton
-                                    // onPress={() => console.log('correct')}
                                     onPress={() => submitAnswer('true')}
                                     text='Correct'
                                     color={colors.green}
                                 />
                                 <AnswerButton
-                                    // onPress={() => console.log('incorrect')}
                                     onPress={() => submitAnswer('false')}
                                     text='Incorrect'
                                     color={colors.red}
@@ -155,7 +159,6 @@ const styles = StyleSheet.create({
             width: 0,
             height: 3
         }
-
     },
     countersContainer: {
         alignSelf: 'flex-start',
@@ -164,20 +167,6 @@ const styles = StyleSheet.create({
         left: 0,
         top: 0,
         margin: 12
-    },
-    questionCount: {
-        // alignSelf: 'flex-start',
-        // position: 'absolute',
-        // left: 0,
-        // top: 0,
-        // margin: 4
-    },
-    answerCount: {
-        // alignSelf: 'flex-start',
-        // position: 'absolute',
-        // top: 0,
-        // left: 0,
-        // margin: 4
     },
     title: {
         fontSize: 20,
@@ -191,6 +180,11 @@ const styles = StyleSheet.create({
     },
     buttonsContainer: {
         flexDirection: 'row'
+    },
+    resultsText: {
+        fontSize: 18,
+        color: colors.white,
+        marginBottom: 8
     }
 })
 
